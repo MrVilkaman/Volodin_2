@@ -6,6 +6,7 @@ import org.jfree.chart.ChartFactory
 import org.jfree.chart.ChartPanel
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.NumberAxis
+import org.jfree.chart.axis.NumberTickUnit
 import org.jfree.chart.plot.PlotOrientation
 import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
@@ -54,7 +55,7 @@ class GraphDrawer(title: String, data: List<Pair<Double,Double>>) : ApplicationF
 			"Y", // y axis label
 			dataset, // data
 			PlotOrientation.VERTICAL,
-			true, // include legend
+			false, // include legend
 			true, // tooltips
 			false                     // urls
 		)
@@ -91,12 +92,17 @@ class GraphDrawer(title: String, data: List<Pair<Double,Double>>) : ApplicationF
 		val rangeAxis = plot.rangeAxis as NumberAxis
 		rangeAxis.standardTickUnits = NumberAxis.createIntegerTickUnits()
 		// OPTIONAL CUSTOMISATION COMPLETED.
+		plot.getDomainAxis().setRange(0.00, 10.00)
+		plot.getDomainAxis().standardTickUnits = NumberAxis.createIntegerTickUnits()
+		plot.getDomainAxis().isVerticalTickLabels = true
+		plot.getRangeAxis().setRange(0.0, 5.0)
+		plot.getRangeAxis().standardTickUnits = NumberAxis.createIntegerTickUnits()
+
 
 		return chart
 	}
 
 	companion object {
-
 		fun draw(data: List<Pair<Double,Double>>) {
 			val demo = GraphDrawer("Line Chart Demo 6", data)
 			demo.pack()
