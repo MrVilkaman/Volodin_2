@@ -1,5 +1,8 @@
 import graph.DatasetHolder
 import graph.GraphDrawer
+import methods.ArrangeMethod
+import methods.EmpiricalFormulas
+import methods.LSMethod
 import java.awt.Color
 import java.util.*
 
@@ -16,12 +19,8 @@ fun main(args: Array<String>) {
 
 
 	val data = ArrayList<Pair<Double, Double>>()
-	var X1: Double = 0.0;
-	var X2: Double = 0.0;
-	var Y1: Double = 0.0;
-	var Y2: Double = 0.0;
-
-	var k: Int = N / 2
+	val arrangeMethod = ArrangeMethod(N)
+	val lsMethod = LSMethod(N)
 
 	for (i in 0..N) {
 
@@ -33,30 +32,34 @@ fun main(args: Array<String>) {
 		val y: Double = funcY + getNoise(A, x, B)
 		data.add(Pair(x, y))
 
-		if (i < k) {
-			X1 += x
-			Y1 += y
-		} else {
-			X2 += x
-			Y2 += y
-		}
+		arrangeMethod.add(i, x, y)
+		lsMethod.add(i, x, y)
 	}
 
-	val calcB = (X2*Y1 - X1*Y2)/(k*X2-X1*(N-k-1))
-	val calcA = (Y1- k*calcB)/X1
+	EmpiricalFormulas().findView(data,::getFunc)
 
-	print("A = $calcA B = $calcB")
+	val ab = arrangeMethod.getAB()
+	println(arrangeMethod)
+	println("A = ${ab.first} B = ${ab.second}")
+
+	val ab2 = lsMethod.getAB()
+	println(lsMethod)
+	println(" A = ${ab2.first} B = ${ab2.second}")
 
 
 	val elements = DatasetHolder("f(x)", data, Color.red, false)
+	val elements2 = datasetLine(A, B, "AB", Color.blue)
+	val elements3 = datasetLine(ab.first, ab.second, "AB Calc", Color.GREEN)
+	val elements4 = datasetLine(ab2.first, ab2.second, "AB Calc 2", Color.orange)
+//	GraphDrawer.draw(arrayListOf(elements, elements2, elements3, elements4))
+}
 
+private fun datasetLine(a: Double, b: Double, name: String, color: Color): DatasetHolder {
 	val data2 = ArrayList<Pair<Double, Double>>()
-
-	data2.add(Pair(0.0,B));
-	data2.add(Pair(xMax,A*xMax+B));
-
-	val elements2 = DatasetHolder("AB", data2, Color.blue, true)
-	GraphDrawer.draw(arrayListOf(elements,elements2))
+	data2.add(Pair(0.0, b))
+	data2.add(Pair(xMax, a * xMax + b))
+	val elements2 = DatasetHolder(name, data2, color, true)
+	return elements2
 }
 
 private fun getFunc(x: Double) = A * x + B
@@ -64,6 +67,11 @@ private fun getFunc(x: Double) = A * x + B
 val rand: Random = Random(System.currentTimeMillis())
 
 fun getNoise(a: Double, x: Double, b: Double): Double {
-	return rand.nextGaussian()*0.3
+	return rand.nextGaussian() * 0.3
 //	return 0.0
 }
+
+//***
+//Метод Средних
+
+
