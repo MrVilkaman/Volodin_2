@@ -86,12 +86,12 @@ class GraphDrawer(title: String, data: List<DatasetHolder>) : ApplicationFrame(t
 		// change the auto tick unit selection to integer units only...
 		val rangeAxis = plot.rangeAxis as NumberAxis
 		rangeAxis.standardTickUnits = NumberAxis.createIntegerTickUnits()
-		// OPTIONAL CUSTOMISATION COMPLETED.
-		plot.getDomainAxis().setRange(0.00, 10.00)
-		plot.getDomainAxis().standardTickUnits = NumberAxis.createIntegerTickUnits()
-		plot.getDomainAxis().isVerticalTickLabels = true
-		plot.getRangeAxis().setRange(0.0, 5.0)
-		plot.getRangeAxis().standardTickUnits = NumberAxis.createIntegerTickUnits()
+//		// OPTIONAL CUSTOMISATION COMPLETED.
+//		plot.getDomainAxis().setRange(0.00, 10.00)
+//		plot.getDomainAxis().standardTickUnits = NumberAxis.createIntegerTickUnits()
+//		plot.getDomainAxis().isVerticalTickLabels = true
+//		plot.getRangeAxis().setRange(0.0, 5.0)
+//		plot.getRangeAxis().standardTickUnits = NumberAxis.createIntegerTickUnits()
 
 
 		return chart

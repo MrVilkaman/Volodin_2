@@ -1,4 +1,6 @@
+import graph.DatasetHolder
 import graph.GraphDrawer
+import java.awt.Color
 import java.util.*
 
 
@@ -45,7 +47,16 @@ fun main(args: Array<String>) {
 
 	print("A = $calcA B = $calcB")
 
-	GraphDrawer.draw(data)
+
+	val elements = DatasetHolder("f(x)", data, Color.red, false)
+
+	val data2 = ArrayList<Pair<Double, Double>>()
+
+	data2.add(Pair(0.0,B));
+	data2.add(Pair(xMax,A*xMax+B));
+
+	val elements2 = DatasetHolder("AB", data2, Color.blue, true)
+	GraphDrawer.draw(arrayListOf(elements,elements2))
 }
 
 private fun getFunc(x: Double) = A * x + B
@@ -53,6 +64,6 @@ private fun getFunc(x: Double) = A * x + B
 val rand: Random = Random(System.currentTimeMillis())
 
 fun getNoise(a: Double, x: Double, b: Double): Double {
-	return rand.nextGaussian()*0.1
+	return rand.nextGaussian()*0.3
 //	return 0.0
 }
