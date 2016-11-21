@@ -42,12 +42,12 @@ class GraphDrawer(title: String, data: List<DatasetHolder>) : ApplicationFrame(t
 
 		// create the chart...
 		val chart = ChartFactory.createXYLineChart(
-			"Line Chart Demo 6", // chart title
+			"", // chart title
 			"X", // x axis label
 			"Y", // y axis label
 			dataset, // data
 			PlotOrientation.VERTICAL,
-			false, // include legend
+			true, // include legend
 			true, // tooltips
 			false                     // urls
 		)
@@ -64,7 +64,7 @@ class GraphDrawer(title: String, data: List<DatasetHolder>) : ApplicationFrame(t
 //		plot.setDataset()
 
 
-		plot.backgroundPaint = Color.lightGray
+		plot.backgroundPaint = Color.white
 		//    plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));
 		plot.domainGridlinePaint = Color.white
 		plot.rangeGridlinePaint = Color.white
