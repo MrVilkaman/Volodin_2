@@ -99,7 +99,7 @@ class GraphDrawer(title: String, data: List<DatasetHolder>) : ApplicationFrame(t
 
 	companion object {
 		fun draw(data: List<DatasetHolder>) {
-			val demo = GraphDrawer("Line Chart Demo 6", data)
+			val demo = GraphDrawer("", data)
 			demo.pack()
 			RefineryUtilities.centerFrameOnScreen(demo)
 			demo.isVisible = true
